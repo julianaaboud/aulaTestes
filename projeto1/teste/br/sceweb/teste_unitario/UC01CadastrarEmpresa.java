@@ -2,6 +2,7 @@ package br.sceweb.teste_unitario;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -23,13 +24,20 @@ public class UC01CadastrarEmpresa {
 		empresa.setEndereco("rua taquari");
 		empresa.setTelefone("2222");
 	}
+	@Ignore
 	@Test
 	public void CT01UC01FBCadastra_com_sucesso() {
 		assertEquals(1,empresaDAO.adiciona(empresa));
 	}
 	
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
+	@Test
+	public void CT01UC01FBCadastra_invalido() {
+		assertEquals("CNPJ invalido", empresa.setCnpj("89424"));
+	}
+	
+	
+	@After
+	public void tearDownAfterClass() throws Exception {
 		empresaDAO.exclui("89424232000180");
 	}
 }
